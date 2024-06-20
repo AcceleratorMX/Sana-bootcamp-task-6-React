@@ -5,4 +5,4 @@ export const IS_DONE = 'IS_DONE';
 export const ADD_CATEGORY = "ADD_CATEGORY";
 export const DELETE_CATEGORY = "DELETE_CATEGORY";
 
-export const createAction = (type) => (payload) => (dispatch) => dispatch({ type, payload });
+export const createAction = (type) => (payload)  => ({ type, payload });

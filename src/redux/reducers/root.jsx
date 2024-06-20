@@ -3,8 +3,8 @@ import todos from "./todos";
 import categories from "./categories";
 
 const rootReducer= () => combineReducers({
-    todos,
-    categories
+    todos: todos,
+    categories: categories
 });
 
 export default rootReducer;
