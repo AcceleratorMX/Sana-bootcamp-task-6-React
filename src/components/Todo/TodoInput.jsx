@@ -1,6 +1,7 @@
 import React from 'react';
 import useTodos from './useTodos';
 import useCategories from '../Categories/useCategories';
+import {Plus} from "react-bootstrap-icons";
 
 const TodoInput = () => {
     const {
@@ -10,28 +11,40 @@ const TodoInput = () => {
         setSelectedCategory,
         deadline,
         setDeadline,
-        handleAddTodo
+        handleAddTodo,
+        handleInputChange
     } = useTodos();
-    const { categories } = useCategories();
-
-    const getOnKeyDownEnter = (handleAddTodo) =>
-        e => e.key === 'Enter' ? handleAddTodo() : '';
+    const {categories} = useCategories();
 
     return (
-        <div onKeyDown={getOnKeyDownEnter(handleAddTodo)}>
+        <div className='form-control d-flex align-items-center p-0 ps-2 pe-2 mb-3'>
             <input
+                className='text__input'
+                value={todo} type="text"
+                onChange={handleInputChange(setTodo)}
+                placeholder='Сформулюйте завдання...'
+            />
+            <input
+                className="date-time__input form-control"
                 type="datetime-local"
                 value={deadline}
-                onChange={(e) => setDeadline(e.target.value)}
+                onChange={handleInputChange(setDeadline)}
             />
-            <input value={todo} type="text" onChange={(e) => setTodo(e.target.value)} />
-            <select value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
+            <select
+                className='form-select select-category__input'
+                value={selectedCategory}
+                onChange={handleInputChange(setSelectedCategory)}>
                 <option value="" hidden>Категорія</option>
                 {categories.map((category) => (
                     <option key={category.id} value={category.id}>{category.name}</option>
                 ))}
             </select>
-            <button type='button' onClick={handleAddTodo}>Додати</button>
+
+            <button
+                type='button'
+                onClick={handleAddTodo}>
+                <Plus className="plus-icon"/>
+            </button>
         </div>
     );
 };

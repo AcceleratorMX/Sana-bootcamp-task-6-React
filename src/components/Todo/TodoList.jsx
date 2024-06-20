@@ -1,6 +1,7 @@
 import React from 'react';
 import useTodos from './useTodos';
 import useCategories from '../Categories/useCategories';
+import {Trash} from "react-bootstrap-icons";
 
 const TodoList = () => {
     const {
@@ -8,19 +9,37 @@ const TodoList = () => {
         handleDeleteTodo,
         handleIsDone
     } = useTodos();
-    const { getCategoryName } = useCategories();
+    const {getCategoryName} = useCategories();
 
     return (
         <ul>
             {todos.sort((a, b) => a.isDone - b.isDone).map((todo) => (
-                <li key={todo.id} className={todo.isDone ? 'text-muted' : ''}>
-                    {todo.name} {getCategoryName(todo.categoryId)} {todo.deadline.replace('T', ' ')}
-                    <button type='button' style={{ marginLeft: '2rem' }}
-                            onClick={() => handleDeleteTodo(todo.id)}>Видалити
-                    </button>
-                    <button type='button' disabled={todo.isDone} style={{ marginLeft: '2rem' }}
-                            onClick={() => handleIsDone(todo.id)}>Виконати
-                    </button>
+                <li key={todo.id} className='d-flex form-control flex-column mb-2 list-item'>
+                    <div className={`d-flex align-items-center justify-content-between fst-italic`}>
+                        <div className='date-time__output'>
+                            {getCategoryName(todo.categoryId)}
+                        </div>
+                        <span className='date-time__output'>
+                            {todo.deadline.replace('T', ' ')}
+                        </span>
+                    </div>
+                    <div className={`d-flex gap-1 align-items-center justify-content-between ${todo.isDone ? 'text-decoration-line-through' : ''}`}>
+                        <div className='d-flex gap-3'>
+                            <input
+                                type='checkbox'
+                                disabled={todo.isDone}
+                                onClick={() => handleIsDone(todo.id)}
+                            />
+                            <div className="text__output">
+                                {todo.name}
+                            </div>
+                        </div>
+                        <button
+                            type='button'
+                            onClick={() => handleDeleteTodo(todo.id)}>
+                            <Trash className="trash-icon"/>
+                        </button>
+                    </div>
                 </li>
             ))}
         </ul>

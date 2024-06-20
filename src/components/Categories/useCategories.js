@@ -14,9 +14,11 @@ const useCategories = () => {
         }
     };
 
-    const handleDeleteCategory = (id) => {
+    const handleDeleteCategory = (id) =>
         dispatch(deleteCategory({ id }));
-    };
+
+    const handleInputChange = (setState) =>
+        (event) => setState(event.target.value);
 
     const getCategoryName = (categoryId) =>
         (categories.find(cat => cat.id === categoryId) || {}).name || '';
@@ -27,7 +29,8 @@ const useCategories = () => {
         setCategory,
         handleAddCategory,
         handleDeleteCategory,
-        getCategoryName
+        getCategoryName,
+        handleInputChange
     };
 };
 

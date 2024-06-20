@@ -18,13 +18,14 @@ const useTodos = () => {
         }
     };
 
-    const handleDeleteTodo = (id) => {
+    const handleDeleteTodo = (id) =>
         dispatch(deleteTodo({ id }));
-    };
 
-    const handleIsDone = (id) => {
+    const handleIsDone = (id) =>
         dispatch(isDone({ id }));
-    };
+
+    const handleInputChange =
+        (setState) => (event) => setState(event.target.value);
 
     return {
         todos,
@@ -36,7 +37,8 @@ const useTodos = () => {
         setDeadline,
         handleAddTodo,
         handleDeleteTodo,
-        handleIsDone
+        handleIsDone,
+        handleInputChange
     };
 };
 

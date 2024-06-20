@@ -13,11 +13,10 @@ const Main = () => {
     const [activeTab, setActiveTab] = useState('todos');
 
     return (
-        <Container>
-            <Tabs
+        <Container className="main__container mt-5">
+            <Tabs classname=''
                 activeKey={activeTab}
                 onSelect={(k) => setActiveTab(k)}
-                className="mb-3"
             >
                 <Tab eventKey="todos" title={TODOS}>
                     <div>
