@@ -7,7 +7,8 @@ const TodoList = () => {
     const {
         todos,
         handleDeleteTodo,
-        handleIsDone
+        handleIsDone,
+        formatedDate
     } = useTodos();
     const {getCategoryName} = useCategories();
 
@@ -20,10 +21,11 @@ const TodoList = () => {
                             {getCategoryName(todo.categoryId)}
                         </div>
                         <span className='date-time__output'>
-                            {todo.deadline.replace('T', ' ')}
+                            {todo.deadline ? 'до ' + formatedDate(todo.deadline) : ''}
                         </span>
                     </div>
-                    <div className={`d-flex gap-1 align-items-center justify-content-between ${todo.isDone ? 'text-decoration-line-through' : ''}`}>
+                    <div
+                        className={`d-flex gap-1 align-items-center justify-content-between ${todo.isDone ? 'text-decoration-line-through' : ''}`}>
                         <div className='d-flex gap-3'>
                             <input
                                 type='checkbox'

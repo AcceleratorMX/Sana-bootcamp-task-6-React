@@ -27,6 +27,16 @@ const useTodos = () => {
     const handleInputChange =
         (setState) => (event) => setState(event.target.value);
 
+    const formatedDate = (dateString) =>
+        new Intl.DateTimeFormat('uk-UA', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: false
+        }).format(new Date(dateString));
+
     return {
         todos,
         todo,
@@ -38,7 +48,8 @@ const useTodos = () => {
         handleAddTodo,
         handleDeleteTodo,
         handleIsDone,
-        handleInputChange
+        handleInputChange,
+        formatedDate
     };
 };
 
